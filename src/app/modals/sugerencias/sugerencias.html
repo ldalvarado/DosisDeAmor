@@ -1,0 +1,44 @@
+<ion-row >
+  
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Searchbar</ion-title>
+      </ion-toolbar>
+      <ion-toolbar>
+        <ion-searchbar></ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+   
+        <ion-col>
+      <ion-list *ngFor="let elm of this.Sugerencia">
+
+          <ion-avatar item-left>         
+            <img src='{{ elm.foto_perfil }}' alt="avatar">
+          </ion-avatar>
+        
+          <ion-item>{{ elm.nombre }}</ion-item>
+       
+          <div class="ion-text-right">
+            <ion-button>Saludo por e-mail</ion-button>
+          </div>
+      </ion-list>
+        </ion-col>
+    
+ 
+</ion-row>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.js"></script>
+  <script>
+    const searchbar = document.querySelector('ion-searchbar');
+    const items = Array.from(document.querySelector('ion-list').children);
+    searchbar.addEventListener('ionInput', handleInput);
+    function handleInput(event) {
+      const query = event.target.value.toLowerCase();
+      requestAnimationFrame(() => {
+        items.forEach(item => {
+          const shouldShow = item.textContent.toLowerCase().indexOf(query) > -1;
+          item.style.display = shouldShow ? 'block' : 'none';
+        });
+      });
+    }
+  </script>

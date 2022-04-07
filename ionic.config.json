@@ -1,0 +1,8 @@
+{
+  "name": "Dosis_Amor",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "get": "all"
+}

@@ -1,0 +1,88 @@
+<ion-card *ngIf="post" [attr.track]="post.state | lowercase">
+  <ion-card-header>
+    <ion-item  (click)="goToAccount(post)"> <!-- *ngIf="post && post.user" button (click)="goToAccount(post.user)"-->
+      <ion-avatar item-left>
+        <img [src]="post.foto_perfil" alt="avatar">
+      </ion-avatar>
+      <ion-label text-wrap style="margin-left: 5px;">
+        <ion-text>
+          <h2>{{ post.nombre }}</h2>
+          
+          <small>{{ post.fecha }}</small>
+        </ion-text>
+      </ion-label>
+      <ion-button *ngIf="user" slot="end" color="light" (click)="openPop($event); $event.stopPropagation();">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-card-header>
+
+  
+  
+  
+
+  <ion-card-content style="position: relative;">
+    <p>{{ post.contenido }}</p>
+    <app-gallery *ngIf="post && post.id_publicacion" source="post" [source_id]="post.id_publicacion" [imgs]="post.foto"></app-gallery>
+    <app-interacciones *ngIf="post && post.id_publicacion" source="post" [source_id]="post.id_publicacion" [likes]="post.likes" [melike]="post.likes"></app-interacciones>
+    <hr style="border-top: 1px solid #737373;">
+    
+    <a (click)="mostrarMas(post.id_publicacion)">Ver 5 comentarios más</a>
+    <div *ngFor="let comentarios of post.comentarios">
+      
+      <ion-card>
+        <ion-card-header>
+          <ion-item>
+            <ion-avatar class="item-avatar">
+                <img [src]="comentarios.foto_perfil" alt="" style="width: 35px; height: 35px; margin-top: 10px;" onerror="this.src='./assets/imgs/avatar1.png'">
+            </ion-avatar>
+            <ion-label text-wrap style="margin-left: 5px;">
+              <ion-text>
+                <h4 for="Perfil">{{comentarios.nombre}}</h4>
+                <small>{{ post.fecha }}</small>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-card-header>
+        <ion-card-content style="position: relative;">
+          {{comentarios.comentario}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2">
+          <ion-avatar class="item-avatar">
+              <img src= "{{ this.fotoPerfil }}" style="width: 35px; height: 35px; margin-top: 10px;">
+          </ion-avatar>  
+        </ion-col>
+        <ion-col size="10">
+          <ion-item>
+            <ion-input [(ngModel)]='message' placeholder="Escribe un comentario..."></ion-input>
+            <ion-button clear item-right  (click)="comentar(post.id_publicacion)"><ion-icon name="send"></ion-icon></ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+
+    <ion-button color="light" (click)="presentActionSheet(post)">
+      <ion-icon name="share"></ion-icon>
+      <ion-text style="padding-left: 5px;">{{ "SHARE" | translate }}</ion-text>
+    </ion-button>
+    
+
+    <ion-button *ngIf="post && post.direction && post.direction.lat && post.direction.lat != '0.0000000'
+    && post.direction.lng != '0.0000000'"
+    color="light" (click)="openMap(post)">
+      <ion-icon name="map"></ion-icon>
+      <ion-text style="padding-left: 5px;">{{ "SEE_ON_MAP" | translate }}</ion-text>
+    </ion-button>
+
+  </ion-card-content>
+  <ion-item>
+    
+  </ion-item>
+</ion-card>

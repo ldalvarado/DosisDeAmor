@@ -1,0 +1,30 @@
+ <ion-app>
+    <ion-header translucent>
+      <ion-toolbar>
+        <ion-title>Searchbar</ion-title>
+      </ion-toolbar>
+      <ion-toolbar>
+        <ion-searchbar></ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content fullscreen>
+      <ion-list *ngFor="let elm of Codigo">
+        <ion-item>{{ elem.Nombre }}</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-app>
+
+  <script>
+    const searchbar = document.querySelector('ion-searchbar');
+    const items = Array.from(document.querySelector('ion-list').children);
+    searchbar.addEventListener('ionInput', handleInput);
+    function handleInput(event) {
+      const query = event.target.value.toLowerCase();
+      requestAnimationFrame(() => {
+        items.forEach(item => {
+          const shouldShow = item.textContent.toLowerCase().indexOf(query) > -1;
+          item.style.display = shouldShow ? 'block' : 'none';
+        });
+      });
+    }
+  </script>

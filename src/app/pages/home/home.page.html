@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="dark-accent" class="menu-toggle-change-color">
+    <ion-buttons slot="start">
+      <a href="#" fill="outline" color="facebook" (click)="logout()">Salir</a>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-progress-bar [type]="progress.type" [value]="progress.value"></ion-progress-bar>
+
+<ion-content *ngIf= "this.token">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row>
+    
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+      <h2 style="border-bottom: 1px solid #d2d7da">
+        Sugerencias para ti 
+        <a (click)="presentModal()" fill="outline" color="facebook" style="float: right;">+</a>
+      </h2>
+    </ion-col>
+  </ion-row>
+      
+<!-- Story line -->
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+      <ion-segment [(ngModel)]="icons" scrollable>
+        <ion-segment-button *ngFor="let s of stories" [value]="s.id_mascota">         
+            <img class="img-thumb" [src]="s.foto_perfil" style="width: 65px; height: 65px; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;" (click)="onSugerenciaChange(s.id_mascota)">
+          <p no-margin no-padding text-center class="story_text">{{ s.nombre }}</p>
+        </ion-segment-button>
+      </ion-segment>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    
+  <ion-row>
+    <ion-col size-xs="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+      <app-publish-form (appPostSend)="addPost($event)"></app-publish-form>
+      <ion-card *ngIf="userContact">
+        <ion-card-header>
+          <ion-card-title>
+            {{ "CONTACT_INFORMATION" | translate }}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="userContact && userContact.contact">
+          <ion-chip *ngIf="userContact.contact.email" color="dark" (click)="mailTo(userContact.contact.email)">
+            <ion-icon name="mail"></ion-icon>
+            <ion-label>{{ userContact.contact.email }}</ion-label>
+          </ion-chip>
+          <ion-chip *ngFor="let email of userContact.contact.emails" color="dark" (click)="mailTo(email)">
+            <ion-icon name="mail"></ion-icon>
+            <ion-label>{{ email }}</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="userContact.contact.phone" color="dark" (click)="callTo(userContact.contact.phone)">
+            <ion-icon name="call"></ion-icon>
+            <ion-label>{{ userContact.contact.phone }}</ion-label>
+          </ion-chip>
+          <ion-chip *ngFor="let phone of userContact.contact.phones" color="dark" (click)="callTo(phone)">
+            <ion-icon name="call"></ion-icon>
+            <ion-label>{{ phone }}</ion-label>
+          </ion-chip>
+        </ion-card-content>
+        <div [hidden]="!map" #mapCanvas id="map_canvas"></div>
+      </ion-card>
+      <app-pets-post-card *ngFor="let post of posts" [post]="post" (appPostDeleted)="delete($event)"></app-pets-post-card>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doScrollDown($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

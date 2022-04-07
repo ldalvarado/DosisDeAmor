@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="dark-accent" class="menu-toggle-change-color">
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button color="light">
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-tabs>
+  	<ion-tab-bar slot="bottom">
+	    <ion-tab-button tab="home">
+	      	<ion-icon name="paw"></ion-icon>
+	    </ion-tab-button>
+
+	    <ion-tab-button tab="search">
+	      	<ion-icon name="search"></ion-icon>
+	    </ion-tab-button>
+
+	    <ion-tab-button tab="notification">
+	      	<ion-icon name="notifications"></ion-icon>
+	      	<ion-badge fill="outline" color="primary">3</ion-badge>
+	    </ion-tab-button>
+
+    	<ion-tab-button tab="perfil" >
+      		<ion-avatar class="item-avatar">
+  			  <img src= "{{ this.fotoPerfil }}" style="width: 35px; height: 35px; margin-top: 10px;">
+          <ion-icon name="arrow-dropright"></ion-icon>
+			</ion-avatar>  
+    	</ion-tab-button>			
+  	</ion-tab-bar>
+</ion-tabs>
+
+

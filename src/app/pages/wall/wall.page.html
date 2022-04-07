@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="dark-accent" class="menu-toggle-change-color">
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button color="light">
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row>
+<ion-list>
+       <ion-item>
+        <ion-label text-wrap style="margin-left: 5px; text-align: center;">
+          <ion-text>
+            <h1 *ngIf="!userId">{{ "Bienvenido al registro del Animal de Compañia" }}</h1>
+            <h1 *ngIf="userId">{{ "Bienvenido al actualizado del Animal de Compañia" }}</h1>
+            <img src="./assets/imgs/Logo.png" class="slide-image" />
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <form [formGroup]="postForm2" (ngSubmit)="sendPost2()">
+
+        <ion-item>
+          <ion-label>{{ "Ingresa la especie" }}</ion-label>
+          <ion-select  name="especie" formControlName="especie" placeholder="especie">
+            <ion-select-option  *ngFor="let elm of Especie" [value]="elm.Id">{{ elm.Texto }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+         <ion-button type="submit" expand="block" [disabled]="!isReadyToSend2">
+            <span>{{ "Siguiente" }}</span>
+          </ion-button>
+      </form>
+
+    </ion-list>
+  </ion-row>
+</ion-content>

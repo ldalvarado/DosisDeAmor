@@ -1,0 +1,136 @@
+<ion-header>
+  <ion-toolbar color="dark-accent" class="menu-toggle-change-color">
+    <ion-buttons slot="start">
+      <a href="#" fill="outline" color="facebook" (click)="logout()">Salir</a>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-progress-bar [type]="progress.type" [value]="progress.value"></ion-progress-bar>
+
+<ion-content>
+
+	<div class="logo">
+		<img src="./assets/imgs/Logo.png" alt="Logo.png">
+  </div>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Registro de Usuario</ion-title>
+  </ion-toolbar>
+
+  <ion-row>
+
+    <!--<div class="text-center">
+      <a href="#" style="text-align: center;">Al registrarte como usuario aceptas los terminos y condiciones</a>
+    </div>-->
+    <ion-col size-xs="12" size-sm="10" offset-sm="1" size-md="8" offset-md="2">
+
+      <form [formGroup]="signupForm" (ngSubmit)="doSignup()">
+        <ion-row>
+          <ion-col>
+            <ion-list>
+               <ion-item>
+                <ion-label position="stacked">{{ "Nombre" }}*</ion-label>
+                <ion-input formControlName="nombre" name="nombre" type="text" (keyup.enter)="doSignup()">
+                </ion-input>
+              </ion-item>
+              <control-messages [control]="signupForm.controls.nombre"></control-messages>
+
+              <ion-item>
+                <ion-label position="stacked">{{ "Apellido Paterno" }}*</ion-label>
+                <ion-input formControlName="ap_paterno" name="ap_paterno" type="text" (keyup.enter)="doSignup()">
+                </ion-input>
+              </ion-item>
+              <control-messages [control]="signupForm.controls.ap_paterno"></control-messages>
+
+              <ion-item>
+                <ion-label position="stacked">{{ "Apellido Materno" }}*</ion-label>
+                <ion-input formControlName="ap_materno" name="ap_materno" type="text" (keyup.enter)="doSignup()">
+                </ion-input>
+              </ion-item>
+              <control-messages [control]="signupForm.controls.ap_materno"></control-messages>
+
+              <ion-item>
+                <ion-label position="stacked">{{ "Nickname" }}*</ion-label>
+                <ion-input formControlName="usuario" name="usuario" type="text" (keyup.enter)="doSignup()">
+                </ion-input>
+              </ion-item>
+              <control-messages [control]="signupForm.controls.usuario"></control-messages>
+
+              <ion-item>
+                <ion-label position="stacked">{{ "EMAIL" | translate }}*</ion-label>
+                <ion-input formControlName="correo" (ionChange)="this.util.CampoCorreo($event)" name="correo" type="email" (keyup.enter)="doSignup()">
+                </ion-input>
+              </ion-item>              
+              <control-messages [control]="signupForm.controls.correo"></control-messages>
+              <ion-item>
+                <ion-label position="stacked">{{ "Correo Alternativo" }}</ion-label>
+                <ion-input formControlName="correo_alt" (ionChange)="this.util.CampoCorreo($event)"name="correo_alt" type="email" (keyup.enter)="doSignup()">
+                </ion-input>
+              </ion-item>              
+              <control-messages [control]="signupForm.controls.correo_alt"></control-messages>
+              <!--<ion-item>
+                <ion-label position="stacked">{{ "Codigo de Pais" }}*</ion-label>
+                
+                     ion-button (click)="presentModal()">Modal</ion-button 
+
+                <ion-select  name="Codigos"  formControlName="telefono_cod_pais" placeholder="Codigos">
+                  <ion-select-option  *ngFor="let elm of Codigos" [value]="elm.Id">{{ elm.Texto }}</ion-select-option>
+                </ion-select>
+              </ion-item>-->
+
+              <ion-item>
+                <ion-label position="stacked">{{ "Teléfono" }}</ion-label>
+                <ion-input formControlName="telefono_num"  (input)="this.util.CampoTelefono($event)" name="telefono_num" type="text" (keyup.enter)="doSignup()">
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">{{ "PASSWORD" | translate }}*</ion-label>
+                <ion-input formControlName="contrasena" name="contrasena" type="password" #password
+                (keyup.enter)="doSignup()">
+                </ion-input>
+                <ion-icon slot="end" name="eye" [color]="isPrimary ? 'primary' : 'dark'"
+                style="z-index: 2" (click)="showPassword(password)"></ion-icon>
+
+              </ion-item>              
+                 <control-messages [control]="signupForm.controls.contrasena"></control-messages>
+
+              <ion-item>
+                <ion-label position="stacked">{{ "PASSWORD" | translate }}*</ion-label>
+                <ion-input formControlName="password_d" name="password_d" type="password" #passwordRe
+                (keyup.enter)="doSignup()">
+                </ion-input>
+                <ion-icon slot="end" name="eye" [color]="isPrimaryRe ? 'primary' : 'dark'"
+                style="z-index: 2" (click)="showPasswordRe(passwordRe)"></ion-icon>
+
+              </ion-item>
+              <ion-item>
+                <ion-checkbox color="secondary" slot="start" formControlName="Terminos"></ion-checkbox>
+                <ion-label>Aceptar los terminos y condiciones</ion-label>
+              </ion-item>  
+
+              <!-- CAMPOS OCULTOS -->
+                <ion-input formControlName="habilitado" name="habilitado" type="hidden" value="1"></ion-input>
+                <ion-input formControlName="id_perfil" name="id_perfil" type="hidden" value="1"></ion-input>
+                <ion-input formControlName="verificado" name="verificado" type="hidden" value="true"></ion-input>
+                <ion-input formControlName="latitud" name="latitud" type="hidden" value="24.0308556"></ion-input>
+                <ion-input formControlName="logitud" name="logitud" type="hidden" value="-104.6704692">
+              </ion-input>
+            </ion-list>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-row>
+
+          <ion-col size-xs="12">
+            <ion-button type="submit" expand="block" color="primary" [disabled]="!isReadyToSend || Aceptado">
+              {{ "SIGNUP" | translate }}
+            </ion-button>
+          </ion-col>
+
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>

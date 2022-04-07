@@ -1,0 +1,44 @@
+<ion-progress-bar [type]="progress.type" [value]="progress.value"></ion-progress-bar>
+
+<ion-content>
+  
+    <h2 class="title spt">Iniciar Sesión</h2>
+ 
+  <ion-row class="sp">
+    <ion-col size-xs="12" size-sm="10" offset-sm="1" size-md="8" offset-md="2">
+      <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">{{ "EMAIL" | translate }}</ion-label>
+            <ion-input formControlName="correo" name="email" type="email"
+            (keyup.enter)="onFormSubmit()"></ion-input>
+          </ion-item>
+          <control-messages [control]="loginForm.controls.correo"></control-messages>
+
+          <ion-item>
+            <ion-label position="stacked">{{ "PASSWORD" | translate }}</ion-label>
+            <ion-input formControlName="contrasena" name="password" type="password" #password
+            (keyup.enter)="onFormSubmit()"></ion-input>
+            <ion-icon name="eye" slot="end" [color]="isPrimary ? 'primary' : 'dark'"
+            style="z-index: 2" (click)="showPassword(password)"></ion-icon>
+          </ion-item>
+          <control-messages [control]="loginForm.controls.contrasena"></control-messages>
+        </ion-list>
+
+        <ion-row responsive-sm>
+
+          <ion-col>
+            <ion-button type="submit" expand="block" color="primary" [disabled]="!loginForm.valid">{{ "LOGIN" | translate }}</ion-button>
+          </ion-col>
+        </ion-row>
+      </form >
+    </ion-col>
+  </ion-row>
+      <ion-row class="ion-align-items-center">
+        <ion-col size-xs="12" size-sm="10" offset-sm="1" size-md="8" offset-md="2" class="sp centrar">
+          <a href="/signup">
+            <span> ¿Tienes problemas para iniciar sesión?<br> Obtén ayuda </span>
+          </a>
+        </ion-col>
+      </ion-row>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="dark-accent" class="menu-toggle-change-color">
+    <ion-title color="light">{{ "NAV.LOGIN" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-progress-bar [type]="progress.type" [value]="progress.value"></ion-progress-bar>
+
+<ion-content>
+
+	<div class="logo">
+		<img src="./assets/imgs/Logo.png" alt="Logo.png">
+  </div>
+
+  <ion-row class="botonera">
+    <ion-col size-xs="12" size-sm="10" offset-sm="1" size-md="8" offset-md="2">
+
+      <ion-row responsive-sm>
+
+        <ion-col size-xs="12">
+          <ion-button expand="block" color="primary" (click)="InicioLogin()">
+            <span style="margin-left: 4px;">Inicia sesión</span>
+          </ion-button>
+        </ion-col >
+
+        <ion-col size-xs="12" class="sp">
+          <ion-button expand="block" color="google" (click)="googleLogin()">
+            <ion-icon name="logo-googleplus"></ion-icon>
+            <span style="margin-left: 4px;">Inicia sesión con Google</span>
+          </ion-button>
+        </ion-col>
+
+        <ion-col size-xs="12" class="sp">
+          <ion-button expand="block" color="facebook" (click)="facebookLogin()">
+            <ion-icon name="logo-facebook"></ion-icon>
+            <span style="margin-left: 4px;">Inicia sesión con Facebook</span>
+          </ion-button>
+        </ion-col >
+
+      </ion-row>
+       <ion-row responsive-sm>
+         <ion-col class="sp">
+            <ion-button expand="block" fill="outline" type="button" color="facebook" (click)="goToSignup();">
+              {{ "SIGNUP" | translate }}
+            </ion-button>
+          </ion-col>
+        <ion-col class="sp"> 
+          <ion-button expand="block" fill="outline" type="button" color="facebook" (click)="goToInvitado();">
+            Entra como Invitado
+          </ion-button>         
+        </ion-col >
+
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="dark" sty>
+    <ion-title>
+      @2019 <ion-text color="secondary" (click)="OpenTermn()">Terminos</ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

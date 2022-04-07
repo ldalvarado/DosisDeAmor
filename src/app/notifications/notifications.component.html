@@ -1,0 +1,15 @@
+<ion-list no-padding no-margin>
+    <ion-list-header color="light">
+      <ion-label class="fw700">Selecciona tu Animal de Compañia</ion-label>
+      <a href="/#/wall" fill="outline" color="facebook" style="float: right; font-size: 25px;" (click)="DismissClick()">+</a>
+    </ion-list-header>
+
+    <ion-item (click)="perfilMascota(s)" *ngFor="let s of this.perfil" fill="outline" color="facebook">
+        <ion-avatar class="item-avatar">
+    		  <img src= "{{ s.FotoUrl }}" >
+    		</ion-avatar> 
+        <ion-label>&nbsp;&nbsp;{{ s.Nombre }}</ion-label>
+    </ion-item>
+
+    <ion-button expand="block" (click)="DismissClick()">Cerrar</ion-button>
+</ion-list>
